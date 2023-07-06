@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+
+<!-- === Header Starts === -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title> Language Conditioned Traffic Generation</title>
+    <link href="./assets/bootstrap.min.css" rel="stylesheet">
+    <link href="./assets/font.css" rel="stylesheet" type="text/css">
+    <link href="./assets/style.css" rel="stylesheet" type="text/css">
+    <script src="./assets/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/corpus.js"></script>
+
+</head>
+<!-- === Header Ends === -->
+
+<script>
+    var lang_flag = 1;
+
+
+
+</script>
+
+<body>
+
+<!-- === Home Section Starts === -->
+<div class="section" style="margin-top: 15pt">
+    <!-- === Title Starts === -->
+    <div class="header" style="padding-bottom: 0pt;margin-bottom: 0pt; min-height: 50pt">
+        <table>
+            <tr>
+                <td>
+                    <div style="padding-top: 0pt;padding-left: 140pt;padding-bottom: 0pt;margin-bottom: 0pt;" class="title" id="lang">
+                        <b> Language Conditioned Traffic Generation </b>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+    <!-- === Title Ends === -->
+    <div class="author" style="padding-top: 0pt; margin-top: 0pt">
+      <a href="https://ariostgx.github.io/website/" target="_blank">Shuhan Tan</a><sup>1</sup>,&nbsp;&nbsp;
+      <a href="https://www.borisivanovic.com/" target="_blank">Boris Ivanovic</a><sup>2</sup>,&nbsp;&nbsp;
+      <a href="https://www.xinshuoweng.com/" target="_blank">Xinshuo Weng</a><sup>2</sup>,&nbsp;&nbsp;
+      <a href="https://research.nvidia.com/person/marco-pavone/" target="_blank">Marco Pavone</a><sup>2</sup>,&nbsp;&nbsp;
+      <a href="http://www.philkr.net/" target="_blank">Philipp Kr&auml;henb&uuml;hl</a><sup>1</sup>
+    </div>
+
+    <div class="institution" style="font-size: 14pt;">
+        <div>
+            <sup>1</sup>UT Austin,
+            <sup>2</sup>NVIDIA<br>
+        </div>
+    </div>
+    <table border="0" align="center">
+        <tr>
+            <td align="center" style="padding: 0pt 0 15pt 0">
+                <a class="bar" href=""><b>Webpage</b></a> |
+                <a class="bar" href=""><b>Video</b></a> |
+                <a class="bar" href=""><b>Code</b></a> |
+                <a class="bar" href=""><b>Paper</b></a>
+            </td>
+        </tr>
+    </table>
+    
+</div>
+
+
+<!-- === Overview Section Starts === -->
+<div class="section">
+    <div class="title" id="method">Overview</div>
+    <div class="body">
+
+      <div class="text">
+        <p>
+          This work presents a language conditioned traffic generation model, <span class="txtt">LCTGen</span>. Our model takes as input a natural language description of a traffic scenario, and outputs traffic actors' initial states and motions on a compatible map. 
+        </p>
+        </div>
+
+        <div class="teaser">
+            <img src="assets/teaser.jpg">
+            <div class="text">
+                <br>
+                Fig. 1 Overview of the proposed method
+            </div>
+        </div>
+        <div class="text">
+
+            <p>
+              <span class="txtt">LCTGen</span> uses a scenario-only dataset and a Large Language Model (LLM).
+              It has two main modules: <span class="txtt">Interpreter</span>, and <span class="txtt">Generator</span>.
+              Given any user-specified natural language query, the LLM-powered <span class="txtt">Interpreter</span> converts the query into a compact, structured representation.
+              <span class="txtt">Interpreter</span> also retrieves an appropriate map that matches the described scenario from a real-world map library.
+              Then, the <span class="txtt">Generator</span> takes the structured representation and map to generate realistic traffic scenarios that accurately follow the user's specifications.
+            </p>
+
+            <div class="teaser" style="width: 105%; margin-left: -25pt">
+                <img src="assets/gpt_example.jpg">
+                <div class="text">
+                    <br>
+                    Fig. 2: Example <span class="txtt">Interpreter</span>  input and output.
+                </div>
+            </div>
+
+            <p>
+              The <span class="txtt">Interpreter</span> takes a natural language text description as input and produces a structured representation with a LLM (GPT-4). The structured representation describes agent and map-specific information with integer vectors.
+              To obtain the structured representation, we use a large language model (LLM) and formulate the problem into a text-to-text transformation.
+              Specifically, we ask GPT-4 to translate the textual description of a traffic scene into a YAML-like description through in-context learning.
+              An exmaple input-output pair is shown above.
+            </p>
+
+            <div class="teaser" style="width: 105%; margin-left: -25pt">
+              <img src="assets/architecture.jpg">
+              <div class="text">
+                  <br>
+                  Fig. 3: The architecture of <span class="txtt">Generator</span>.
+              </div>
+          </div>
+
+            <p>
+              Given a structured representation and map, the <span class="txtt">Generator</span> produces a traffic scenario (composed of actor initialization and their motion).
+              We design <span class="txtt">Generator</span> as a query-based transformer model to efficiently capture the interactions between different agents and between agents and the map. 
+              It places all the agents in a single forward pass and supports end-to-end training.
+              The <span class="txtt">Generator</span> has four modules: 1) a map encoder that extracts per-lane map features; 2) an agent query generator that converts structured representation to agent query; 3) a generative transformer that models agent-agent and agent-map interactions; 4) a scene decoder to output the scenario.
+              </p>
+        </div>
+    </div>
+</div>
+
+
+<div class="section">
+    <div class="title" id="Parkour Demo">Qualitative results</div>
+    <p>
+        We show examples of <span class="txtt">LCTGen</span>'s output given texts from the Crash Report (first row) and Attribute Description (second row) datasets below.
+        Each example is a pair of input text and the generated scenario.
+        Because texts in Crash Report are excessively long, we only show the output summary of the <span class="txtt">Interpreter</span> module.
+    </p>
+    <center>
+      <div class="teaser" style="width: 115%; margin-left: -55pt">
+        <img src="assets/main_result.jpg">
+        <div class="text">
+            <br>
+            Fig. 4: Results of text-conditioned traffic generation.
+        </div>
+    </div>
+    </center>
+    <p>
+        We also apply <span class="txtt">LCTGen</span> to instructional traffic scenario editing. 
+        We show an example of consecutive instructional editing of a real-world scenario in below. 
+        We can see that <span class="txtt">LCTGen</span> supports high-level editing instructions (vehicle removal, addition and action change). It produces realistic output following the instruction.
+    </p>
+    <center>
+      <div class="teaser" style="width: 115%; margin-left: -50pt">
+        <img src="assets/editing.jpg">
+        <div class="text">
+            <br>
+            Fig. 5: Instructional editing on a real-world scenario.
+        </div>
+    </div>
+</center>
+</div>
+
+<div class="section" style=" text-align: left">
+    <div class="title" id="Demo Video">Demo Video</div>
+    This video shows animated scenarios generated by <span class="txtt">LCTGen</span>. 
+    We also show the application of <span class="txtt">LCTGen</span> to controllable self-driving policy evaluation.
+    <div class="body">
+        <div class="video-container" style="position: relative; padding-top: 2%; margin: 0pt auto; text-align: center;">
+<iframe width="900" height="600" src="https://www.youtube.com/embed/T5GFOxzw0aw" title="YouTube video player"
+        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
+
+
+<!-- <center>
+  <video class="video-container" width="100%" height="300" style="" autoplay
+         muted loop id="parkour_video">
+      <source src="assets/Motion_Primitive_Grids.mp4" type=video/mp4>
+  </video>
+</center> -->
+
+
+<!-- === Reference Section Starts === -->
+<div class="section">
+    <div class="bibtex">
+        <div class="text">Reference</div>
+    </div>
+    <pre>
+@article{tan2023lctgen,
+  title={Language Conditioned Traffic Generation},
+  author={Tan, Shuhan and Ivanovic, Boris and Weng, Xinshuo and Pavone, Marco and Kr\"ahenb\"uhl, Philipp,
+  journal={arXiv preprint arXiv:XXXXXXX},
+  year={2023}
+}
+    </pre>
+    <!-- Adjust the frame size based on the demo (Every project differs). -->
+</div>
+
+</body>
+</html>
