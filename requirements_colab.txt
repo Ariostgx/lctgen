@@ -1,0 +1,14 @@
+# skip pakages already installed in colab
+pytorch-lightning==1.9.3
+# matplotlib==3.6.2
+# scipy==1.9.3
+# Shapely==1.8.0
+torchmetrics==0.9.3
+# PyYAML==6.0
+# imageio==2.25.1
+wandb==0.15.2
+yapf==0.30.0
+
+# install additional packages from trafficgen
+openai==0.28.1
+yacs==0.1.8

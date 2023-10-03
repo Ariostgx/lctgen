@@ -1,0 +1,8 @@
+EXPERIMENT_NAME: 'attr_ind_motion_cot'
+
+LLM:
+  CODEX:
+    MODEL: 'gpt-4'
+    PROMPT_FILE: 'attr_ind_motion/non_api_cot_attr.prompt'
+    SYS_PROMPT_FILE: 'attr_ind_motion/sys_non_api_cot_attr.prompt'
+    TEMPERATURE: 0.1

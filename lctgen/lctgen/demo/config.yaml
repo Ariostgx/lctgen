@@ -1,0 +1,226 @@
+CHECKPOINT_EPOCHES: 15
+CHECKPOINT_INTERVAL: 1
+CMD_TRAILING_OPTS: []
+DATASET:
+  AUGMENTATION:
+    ENABLE: true
+    RANDOM_EMPTY_RATE: 0.15
+    RANDOM_MASK_RATE: 0.1
+  CACHE: false
+  DATA_LIST:
+    ROOT: data/list
+    TEST: demo.txt
+    TRAIN: demo.txt
+    VAL: demo.txt
+  DATA_PATH: data/demo/waymo
+  DATA_USAGE: 8
+  ENABLE_OUT_RANGE_TRAJ: true
+  IMAGE:
+    RENDER: false
+  INCLUDE_LANE_INFO: false
+  MAX_AGENT_NUM: 32
+  MAX_TIME_STEP: 50
+  RANGE: 50
+  REF_PATH: null
+  TEXT:
+    ACTION_DIM: 1
+    ACTION_STEP: 4
+    ALL_CLASSES:
+    - pos
+    - distance
+    - direction
+    - speed
+    - action
+    CLASS:
+    - pos
+    - distance
+    - direction
+    - speed
+    - action
+    CONTEXT_LENGTH: 77
+    COUNT_BASE: 1
+    DISTANCE_BASE: 20
+    FLATTEN: false
+    NEGATIVE_SAMPLE_NUM: 10
+    PADDING: -1
+    RANDOM_SAMPLE: false
+    RANDOM_SHUFFLE: false
+    SAMPLE_NUMS:
+    - 1
+    SPEED_BASE: 2.5
+    TYPE: attr_ind
+    USE_PADDING: true
+    USE_TRAJ: true
+  THRES: 5
+  TIME_SAMPLE_GAP: 1
+  TRAJ_TYPE: xy_theta_relative
+  TYPE: WaymoOpenMotion
+DEBUG: false
+EXPERIMENT_DIR: lctgen
+EXPERIMENT_NAME: demo
+GPU: []
+LIMIT_VAL_BATCHES: 1.0
+LLM:
+  CODEX:
+    BEST_OF: 1
+    MAX_TOKENS: 2048
+    MODEL: gpt-3.5-turbo
+    PROMPT_FILE: chatapi.prompt
+    SYS_PROMPT_FILE: null
+    TEMPERATURE: 0.0
+  TYPE: codex
+LOAD_CHECKPOINT_MODEL: false
+LOAD_CHECKPOINT_PATH: null
+LOAD_CHECKPOINT_TRAINER: false
+LOGGER: tsboard
+LOG_INTERVAL_STEPS: 1
+LOSS:
+  AE:
+    TEXT_AE: false
+  CLIP:
+    LOGIT_SCALE: 1.0
+  DETR:
+    AE_MODES:
+    - text
+    ALIGNMENT:
+      ENABLE: false
+      WEIGHT:
+        CLIP: 1.0
+        COSINE: 1.0
+        MSE: 1.0
+    ATTR_WEIGHT:
+      bbox: 1.0
+      heading: 1.0
+      motion: 0.1
+      pos: 1.0
+      speed: 1.0
+      vel_heading: 1.0
+    EOS_COEF: 0.1
+    LOSSES:
+    - labels
+    - attributes
+    MATCH_COST:
+      CLASS: 1.0
+    MATCH_METHOD: sequential
+    PRED_BACKGROUND: false
+    TEXT_AE: true
+    USE_CENTER_MASK: false
+    WEIGHT:
+      attributes: 1.0
+      labels: 1.0
+      vae: 1.0
+  TYPE: clip
+  WEIGHTS:
+  - 1.0
+MAX_EPOCHES: 100
+METRIC:
+  MMD:
+    ATTR:
+    - position
+    - speed
+    - size
+    - heading
+    KERNEL_MUL: 1.0
+    KERNEL_NUM: 1
+  TOPK: 1
+  TYPE:
+  - MMD
+  - traj_match
+MODEL:
+  MOTION:
+    CLS_WEIGHT: 0.1
+    CUMSUM: true
+    ENABLE: true
+    ENCODE_MOTION: false
+    K: 12
+    PRED_HEADING_VEL: true
+    PRED_MODE: mlp_gmm
+    STEP: 49
+  PREDICT_EGO: true
+  SCENE:
+    AGGREGATION: max
+    DEBUG:
+      RANDOM_ENCODE: false
+      ZERO_ENCODE: false
+    EMBEDDING_DIM: 256
+    HIDDEN_DIMS: []
+    INIT_CFG:
+      ATTR_QUERY:
+        POS_ENCODING_DIM: 256
+        USE_LEARNABLE_QUERY: false
+      DECODER:
+        ACTIVATION: gelu
+        ATTR_GMM_ENABLE: true
+        ATTR_GMM_K: 5
+        DROPOUT: 0.1
+        FF_DIM: 2048
+        LANE_NUM: 384
+        MAP_POS: none
+        MLP_DIM: 512
+        NHEAD: 4
+        NLAYER: 1
+        QUERY_NUM: 32
+        QUERY_POS: none
+        TYPE: agent_decode
+      ENCODER:
+        ACTIVATION: gelu
+        DROPOUT: 0.1
+        FF_DIM: 1024
+        NHEAD: 4
+        NLAYER: 2
+        TYPE: mcg
+      context_num: 32
+      gaussian_comp: 5
+      hidden_dim: 256
+      max_num: 32
+    NORMALIZE: false
+    REMOVE_COLLISION: true
+  TYPE: lctgen
+  USE_REL_HEADING: true
+MODEL_NAME: lctgen
+ROOT_DIR: .
+SAVE_CHECKPOINT: true
+SAVE_DIR: .
+SEED: 0
+TASK_CONFIG: {}
+TENSORBOARD_DIR: tensorboard
+TEST:
+  BATCH_SIZE: 16
+  COMPUTE_LOSS: true
+  DROP_LAST: false
+  NUM_WORKERS: 4
+  SHUFFLE: false
+  SPLIT: test
+TRAIN:
+  BATCH_SIZE: 64
+  DROP_LAST: true
+  LR: 0.0003
+  LR_MUL_FACTOR: 0.1
+  LR_MUL_MODEL: null
+  MOMENTUM: 0.9
+  NESTEROV: true
+  NUM_WORKERS: 4
+  OPTIMIZER: AdamW
+  SCHEDULER:
+    ETA_MIN: 0.0
+    GAMMA: 0.1
+    MILESTONES:
+    - 70
+    - 90
+    STEP: 5
+    TYPE: MultiStepLR
+    WARMUP_EPOCHES: 10
+  SHUFFLE: true
+  SPLIT: train
+  WEIGHT_DECAY: 0.0004
+TRAINER_NAME: default
+VAL:
+  BATCH_SIZE: 16
+  COMPUTE_LOSS: true
+  DROP_LAST: false
+  NUM_WORKERS: 4
+  SHUFFLE: true
+  SPLIT: test
+VAL_INTERVAL: 10
+VIS_INTERVAL: 20
+WANDB_PROJ: lctgen_attr_ind_motion

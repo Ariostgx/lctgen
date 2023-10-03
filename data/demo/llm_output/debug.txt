@@ -1,0 +1,12 @@
+Summary: The ego vehicle (V1) is in a calm and safe intersection scenario with a few vehicles around. Because the scenario is chill and safe, there should be wide roads and fewer vehicles. We put 3 vehicles in a four-lane two-way road with an intersection at the center.
+Explanation: 
+- V1 (ego vehicle) is in the center and keeps speed. V1 keeps speed, so its speed is set to be 10m/s (index 4). It keeps speed, so its actions are all 4 (keep speed).
+- V2 is on the front right side of V1, so its position is 3 (front right), distance is determined by the scenario, direction is 0 (parallel_same), and speed is slow. It keeps going straight, and keep speed.
+- V3 is on the back left side of V1, so its position is 1 (back left), distance is determined by the scenario, direction is 0 (parallel_same), and speed is slow. It keeps going straight, and keep speed.
+- Map: This happens in a four-lane two-way road, the ego vehicle is on the second lane from right with lane id 2. There is an intersection with a two-way road at the center.
+Actor Vector:
+- 'V1': [-1, 0, 0, 4, 4, 4, 4, 4]
+- 'V2': [3, 0, 0, 2, 4, 4, 4, 4]
+- 'V3': [1, 0, 0, 1, 4, 4, 4, 4]
+Map Vector:
+- 'Map': [3, 3, 2, 2, 0, 2]

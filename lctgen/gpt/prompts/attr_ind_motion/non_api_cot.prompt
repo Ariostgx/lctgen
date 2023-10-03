@@ -1,0 +1,44 @@
+Query: This two-vehicle collision occurred at the intersection of an eight-lane divided trafficway and a two-lane roadway during daytime hours. The roads were asphalt, dry, and controlled by traffic signals. There were four lanes for the northbound and southbound traffic, including left and right turn-only lanes for both travel directions. The northbound lanes were level and the southbound lanes had a grade of 2%. The speed limit was 72 kmph (45 mph) in the north/south lanes. Vehicle 2, a 2020 Ford Escape utility vehicle, was traveling southbound (north to south) in the outside straight-through lane. As V1 attempted to turn left at the intersection, its front was contacted by the front of V2 (Event 1). After impact, both vehicles were redirected slightly southwest. After the initial contact, V1 rotated counterclockwise while V2 rotated clockwise. Vehicle 1 came to rest facing southwest and V2 came to rest facing west. Both vehicles were towed from the crash site due to disabling damage.
+
+Output:
+Summary: V1 travels northbound and tries to turn left at an intersection and is struck by V2 traveling southbound. There are 2 vehicles in this scenario. This happens at the intersection of an eight-lane divided trafficway and a two-lane roadway, controlled by traffic signals.
+Explanation: 
+- V1: ego vehicle is attempting to turn left at the intersection. We cannot find V1's speed in the query. Because, V1 tries to turn left, its initial speed should be set low. We set V1's speed as 5 m/s, which has the index of 2. V1 turns left, so its actions are all 1 (turn left).
+- V2: V1 is turning left when it is struck by V2, so 5 seconds before the crash, V2 is coming from the opposite direction (southbound), crossing the path of V1. In the coordinates of V1 (which is facing north initially), V2 comes from the front and is on the left side. Hence, V2's position is "front left" (0). As V1 is facing northbound and V2 facing southbound, V2 is moving in the parallel opposite direction with V1. Therefore its direction is 1 (parallel_opposite). We cannot find V2's speed in the query. Because V2 travel southbound keep speed and hit by V1 5 seconds later, we assume V2's init speed is 8 m/s (index 3). Given this speed, V2's distance to V1 is 8m/s * 5s = 40m (index 8). V2 keeps going straight, so its actions are all 4 (keep speed).
+- Map: This happens at the intersection of an eight-lane divided trafficway (4 lanes for northbound and southbound traffic) and a two-lane roadway. The ego vehicle is in the left turn-only lane with lane id 4. There is an intersection with a two-lane two-way road ahead. V1 is about to cross the interaction, therefore the distance to the intersection is with 15 meter index 3.
+Actor Vector:
+- 'V1': [-1, 0, 0, 2, 1, 1, 1, 1]
+- 'V2': [0, 8, 1, 3, 4, 4, 4, 4]
+Map Vector:
+- 'Map': [4, 4, 2, 2, 3, 4]
+
+Query: A 2021 Subaru Forester compact utility (V1) was traveling north in the right lane of two negotiating the left curve at approximately 53 km/h (33 mph). Pre-crash data from the EDR suggests she intended to continue straight through the intersection to proceed to the highway on-ramp on the other side. A 2021 Kenworth tractor-trailer (V2) was traveling west in the second lane of three and intending to continue straight through the intersection. Police estimated V2\u2019s travel speed as 56 km/h (35 mph).   Vehicle 1 entered the intersection without slowing for the stop sign and was struck on the right plane by V2\u2019s front (Event 1). Both vehicles then traveled towards the shoulder in the northwest corner of the intersection. The front of V2 struck a guardrail end terminal (Event 2) before coming to rest in the roadside northwest of the intersection. Vehicle 1 struck the guardrail\u2019s face (Event 3) before coming to rest on the westbound shoulder of the road. Both vehicles were towed due to disabling vehicle damage.
+
+Output:
+Summary: V1 is traveling north and enters an intersection without stopping, getting struck by V2 traveling west. There are 2 vehicles in this scenario. This happens on a two-lane two-way road with an intersection.
+Explanation: 
+- V1 (ego vehicle) is moving north in the right lane. Its speed is 33 mph (53 km/h) which is approximately 14.7 m/s (index 5). V1 keeps going straight, so its actions are all 4 (keep speed).
+- V2 is moving west in the second lane of three and hit by V1 moving north, so 5 seconds before the crash, V2 is on the front of V1. Because V2 is moving west and hit V1, in V1's coordinates (which is facing north), V2 is on the right side of V1. So V2 has position of 3 (front right). Because V2 is moving west and V1 moving north 5 seconds before the crash, in V1's coordinates V2's direction is 2 (perpendicular_up). V2's speed is 35 mph (56 km/h) which is approximately 15.6 m/s (index 6). Because V1 and V2 moves in perpendicular directions, V2's initial distance is about 15.6 m/s * 5 ~= 75 (index 15). V2 keeps going straight, so its actions are all 4 (keep speed).
+- Map: This happens in a two-lane two-way road, the ego vehicle is in the right lane with lane id 1. There is an intersection with a three-lane two-way road ahead. The distance of the ego vehicle to the intersection is set to be 14.7m/s * 5 ~= 70 (index 14) to make the ego vehicle crash when it enters the intersection without stopping.
+Actor Vector:
+- 'V1': [-1, 0, 0, 5, 4, 4, 4, 4]
+- 'V2': [3, 15, 2, 6, 4, 4, 4, 4]
+Map Vector:
+- 'Map': [2, 2, 3, 3, 14, 1]
+
+Query: The crash occurred during daylight hours on a dry, bituminous, two-lane roadway under clear skies.  There was one northbound travel lane and one southbound travel lane with speed limit of 40 km/h (25 mph).   The northbound lane had a -3.6 percent grade and the southbound lane had a +3.6 percent grade.  Both travel lanes were divided by a double yellow line. A 2016 Mazda CX-3 (V1) was in a parking lot attempting to execute a left turn to travel south.  A 2011 Dodge Charger (V2/police car) was traveling north responding to an emergency call with lights sirens activated. V1 was in a parking lot (facing west) and attempted to enter the roadway intending to turn left.   As V1 entered the roadway it was impacted on the left side by the front of V2 (Event 1).  V1 then rotated counterclockwise and traveled off the west road edge and impacted an embankment with its front left bumper (Event 2).  After initial impact V2 continued on in a northern direction and traveling to final rest approximately 40 meters north of impact area facing north in the middle of the roadway.  V1 and V2 were towed from the scene due to damage.
+
+Summary: V1 attempts to turn left from a parking lot onto a two-lane roadway and is struck by V2, a police car traveling north with lights and sirens activated. There are 2 vehicles in this scenario. This happens on a parking lot to a two-lane two-way road with intersection.
+Explanation:
+- V1 (ego vehicle) is attempting to turn left from a parking lot onto the roadway. We cannot find V1's speed in the query. Because V1 tries to turn left, its initial speed should be set low. We set V1's speed as 5 m/s, which has the index of 2. V1 turns left, so its actions are all 1 (turn left).
+- V2 is a police car traveling north with lights and sirens activated. As V1 is turning left, 5 seconds before the crash, V1 is facing west and V2 is coming from northbound, crossing the path of V1. In the coordinates of V1 (which is facing west initially), V2 comes from the front and is on the left side. Hence, V2's position is "front left" (3). As V1 is facing west and V2 facing north, V2 is moving in the perpendicular down direction with V1. Therefore its direction is 3 (perpendicular_down). We cannot find V2's speed in the query. Because V2 is a police car responding to an emergency call, we assume V2's init speed is 10 m/s (index 4). Given this speed, V2's distance to V1 is 10m/s * 5s = 50m (index 10). V2 keeps going straight, so its actions are all 4 (keep speed).
+- Map: V1 tries to turn left from a partking lot onto a two-lane roadway. There are a one-way exit lane from parking lot (one same-direction parallel) and the ego vehicle is in the left turn lane with lane id 1. On the perpendicular side there is a two-lane roadway. V1 is about to turn left, so the distance to the intersection is set to be 10m (index 2).
+Actor Vector:
+- 'V1': [-1, 0, 0, 2, 1, 1, 1, 1]
+- 'V2': [0, 10, 3, 4, 4, 4, 4, 4]
+Map Vector:
+- 'Map': [1, 0, 1, 1, 2, 1]
+
+Query: INSERT_QUERY_HERE
+
+Output:

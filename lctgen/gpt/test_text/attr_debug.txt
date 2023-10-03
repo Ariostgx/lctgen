@@ -1,0 +1,7 @@
+the scene is nearly empty.
+
+most cars are moving in medium speed.
+
+the scene is very dense. there are only vehicles on the front side of the center car. the center car stops.
+
+the scene is with sparse density. there are only vehicles on the left side of the center car. most cars are moving in slow speed.

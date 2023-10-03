@@ -1,0 +1,8 @@
+EXPERIMENT_NAME: 'debug'
+
+LLM:
+  CODEX:
+    MODEL: 'debug'
+    PROMPT_FILE: 'attr_ind_motion/non_api_debug.prompt'
+    SYS_PROMPT_FILE: 'attr_ind_motion/sys_debug.prompt'
+    TEMPERATURE: 0.2

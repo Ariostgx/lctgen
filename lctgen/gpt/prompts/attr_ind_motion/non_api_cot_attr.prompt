@@ -1,0 +1,24 @@
+Query: the scene is very dense. there are vehicles on the different sides of the center car. most cars are moving in fast speed. the center car turns left.
+
+Output:
+Summary: The ego vehicle (V1) turns left in a dense traffic scenario with multiple vehicles on the right back side. Because the scenario is very dense, there should be narrow roads and more vehicles. We put 8 vehicels in a two-lane two-way road with an intersection ahead.
+Explanation: 
+- V1 (ego vehicle) is in the center and turns left. V1 turns left, so its speed is slow and set to be 5m/s (index 2). It turns left, so its actions are all 1 (turn left).
+- V2-V5 are on the right back side of V1, so their positions are 2 (back right), distances are determined by the scenario, directions are 0 (parallel_same), and speeds are slow. They keep going straight, and keep speed.
+- V6 is also on the right back side of V1 but slightly further away, so its position is 2 (back right), distance is determined by the scenario, direction is 0 (parallel_same), and speed is slow.
+- Map: This happens in a two-lane two-way road, the ego vehicle is on the left-turn lane with lane id 1. There is an intersection with a two-way road around 10 meters (index 2) ahead as ego vehicle is turning left.
+Actor Vector:
+- 'V1': [-1, 0, 0, 1, 1, 1, 1, 1]
+- 'V2': [2, 1, 0, 2, 4, 4, 4, 4]
+- 'V3': [2, 2, 0, 1, 4, 4, 4, 4]
+- 'V4': [2, 2, 0, 2, 4, 4, 4, 4]
+- 'V5': [2, 3, 0, 1, 4, 4, 4, 4]
+- 'V6': [2, 5, 0, 1, 4, 4, 4, 4]
+- 'V7': [2, 5, 1, 1, 4, 4, 4, 4]
+- 'V8': [2, 5, 1, 1, 4, 4, 4, 4]
+Map Vector:
+- 'Map': [1, 1, 2, 2, 2, 2]
+
+Query: INSERT_QUERY_HERE
+
+Output:

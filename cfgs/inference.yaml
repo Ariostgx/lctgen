@@ -1,0 +1,134 @@
+SEED: 1
+SAVE_CHECKPOINT: true
+DATASET:
+  CACHE: False
+  ENABLE_OUT_RANGE_TRAJ: True
+  TYPE: WaymoOpenMotion
+  MAX_TIME_STEP: 50
+  TIME_SAMPLE_GAP: 1
+  AUGMENTATION:
+    ENABLE: true
+    RANDOM_MASK_RATE: 0.1
+  TRAJ_TYPE: xy_theta_relative
+  DATA_LIST:
+    TEST: val.txt
+    VAL: val.txt
+    TRAIN: train.txt
+  TEXT:
+    TYPE: attr_ind
+    ALL_CLASSES:
+    - 'pos'
+    - 'distance'
+    - 'direction'
+    - 'speed'
+    - 'action'
+    CLASS:
+    - 'pos'
+    - 'distance'
+    - 'direction'
+    - 'speed'
+    - 'action'
+    NEGATIVE_SAMPLE_NUM: 10
+    COUNT_BASE: 1
+    DISTANCE_BASE: 20
+    SPEED_BASE: 2.5
+    USE_PADDING: True
+    PADDING: -1
+    FLATTEN: False
+    USE_TRAJ: True
+    ACTION_STEP: 4
+
+DEBUG: true
+EXPERIMENT_DIR: lctgen
+EXPERIMENT_NAME: inference
+
+LOAD_CHECKPOINT_MODEL: true
+LOAD_CHECKPOINT_PATH: 'checkpoints/example.ckpt'
+LOAD_CHECKPOINT_TRAINER: true
+
+LOSS:
+  DETR:
+    AE_MODES: ['text']
+    MATCH_METHOD: sequential
+    PRED_BACKGROUND: False
+    ALIGNMENT:
+      ENABLE: false
+    LOSSES:
+    - labels
+    - attributes
+    MATCH_COST:
+      CLASS: 1.0
+    TEXT_AE: true
+    WEIGHT:
+      labels: 1.0
+      attributes: 1.0
+    ATTR_WEIGHT:
+      speed: 1.0
+      pos: 1.0
+      vel_heading: 1.0
+      heading: 1.0
+      bbox: 1.0
+      motion: 0.1
+
+MAX_EPOCHES: 100
+METRIC:
+  TYPE:
+  - MMD
+  - traj_match
+
+MODEL:
+  TYPE: lctgen
+
+  MOTION:
+    ENABLE: true
+    STEP: 49
+    CUMSUM: true
+    PRED_MODE: mlp_gmm
+    CLS_WEIGHT: 0.1
+    K: 12
+    PRED_HEADING_VEL: true
+
+  PREDICT_EGO: true
+  SCENE:
+    EMBEDDING_DIM: 256
+    HIDDEN_DIMS: []
+    INIT_CFG:
+      hidden_dim: 256
+      DECODER:
+        DROPOUT: 0.1
+        FF_DIM: 2048
+        LANE_NUM: 384
+        MAP_POS: none
+        MLP_DIM: 512
+        NHEAD: 4
+        NLAYER: 1
+        QUERY_NUM: 32
+        TYPE: agent_decode
+        ATTR_GMM_ENABLE: True
+        ATTR_GMM_K: 5
+  
+      ATTR_QUERY:
+        POS_ENCODING_DIM: 256
+
+    NORMALIZE: false
+    PRETRAINED: false
+
+TEST:
+  BATCH_SIZE: 16
+  SHUFFLE: false
+  NUM_WORKERS: 4
+TRAIN:
+  BATCH_SIZE: 64
+  LR: 0.0003
+  OPTIMIZER: AdamW
+  SCHEDULER:
+    MILESTONES:
+    - 70
+    - 90
+  NUM_WORKERS: 4
+VAL:
+  BATCH_SIZE: 16
+  NUM_WORKERS: 4
+VAL_INTERVAL: 10
+VIS_INTERVAL: 20
+WANDB_PROJ: lctgen_attr_ind_motion

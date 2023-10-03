@@ -1,0 +1,25 @@
+the scene is very dense. there are only vehicles on the right back side of the center car. most cars are moving in slow speed. the center car turns left.
+- 'V1': ['pos': -1, 'distance': 0, 'direction': 0, 'speed': 2, 'action': [5, 5, 2, 4]]
+- 'V2': ['pos': 3, 'distance': 1, 'direction': 4, 'speed': 0, 'action': [4, 3, 0, 1]]
+- 'Map': ['hori_lane': [2,3], 'vertical_lane': [2,1], 'front_vertical_lane': [2,1], 'left/right_lane_dir': [1, 0]]
+
+the scene is with sparse density. there are only vehicles on the right front side of the center car. most cars are moving in slow speed. the center car turns left.
+- 'V1': ['pos': -1, 'distance': 0, 'direction': 0, 'speed': 2, 'action': [5, 5, 2, 4]]
+- 'V2': ['pos': 3, 'distance': 1, 'direction': 4, 'speed': 0, 'action': [4, 3, 0, 1]]
+- 'Map': ['hori_lane': [2,3], 'vertical_lane': [2,1], 'front_vertical_lane': [2,1], 'left/right_lane_dir': [1, 0]]
+
+most cars are moving in slow speed. the center car accelerates.
+- 'V1': ['pos': -1, 'distance': 0, 'direction': 0, 'speed': 2, 'action': [5, 5, 2, 4]]
+- 'V2': ['pos': 3, 'distance': 1, 'direction': 4, 'speed': 0, 'action': [4, 3, 0, 1]]
+- 'Map': ['hori_lane': [2,3], 'vertical_lane': [2,1], 'front_vertical_lane': [2,1], 'left/right_lane_dir': [1, 0]]
+
+the scene is very dense. the center car turns left.
+- 'V1': ['pos': -1, 'distance': 0, 'direction': 0, 'speed': 2, 'action': [5, 5, 2, 4]]
+- 'V2': ['pos': 3, 'distance': 1, 'direction': 4, 'speed': 0, 'action': [4, 3, 0, 1]]
+- 'Map': ['hori_lane': [2,3], 'vertical_lane': [2,1], 'front_vertical_lane': [2,1], 'left/right_lane_dir': [1, 0]]
+
+the scene is with sparse density. there are only vehicles on the left front side of the center car. most cars are moving in fast speed. the center car turns right.
+- 'V1': ['pos': -1, 'distance': 0, 'direction': 0, 'speed': 2, 'action': [5, 5, 2, 4]]
+- 'V2': ['pos': 3, 'distance': 1, 'direction': 4, 'speed': 0, 'action': [4, 3, 0, 1]]
+- 'Map': ['hori_lane': [2,3], 'vertical_lane': [2,1], 'front_vertical_lane': [2,1], 'left/right_lane_dir': [1, 0]]
+

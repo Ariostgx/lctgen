@@ -1,0 +1,66 @@
+Query: the scene is very dense. there are vehicles on the different sides of the center car. most cars are moving in slow speed. the center car turns left.
+
+Output:
+Summary: The ego vehicle (V1) turns left in a dense traffic scenario. Because the scene is very dense, we should add more vehicles in each distance range to make them densely distributed. There should be multiple vehicles in different sides of the ego car. We generate 12 vehicles in the scene. Because V1 takes an left turn, we should have an intersection ahead of V1 in this scenario.
+Explanation: 
+- V1 (ego vehicle) is in the center and turns left. V1 turns left, so its speed is slow and set to be 5m/s (index 2). It turns left, so its actions are all 1 (turn left).
+- V2-V7 are in the closet distance range (index 0). V2-V4 are in the right back of ego car (index 2),  with the same direciton as ego car (index 0). V5-V7 are in the left back of ego car (index 1), with the opposite direction as the ego car (index 1) Ther are all moving in slow speed (index 1 or 2) and all moveing straight (index 4) with low speed (index 1 or 2).
+- V8-V9 are in the farer distance range (index 1), with perpendicular-up directions (index 3). Because the other vehicles are crossing the intersection, with traffic rules they are waiting at the intersection. They are on the front left of ego car (index 0). They stop to wait for traffic light with action index (0).
+- V10-V11 are in the farer distance range (index 2), with opposite direction as the ego car (index 1). They are on the front left of ego car (index 0), moving in slow speed (index 1 or 2). Their actions are moving straight, whether keeping speed(index 4), accelerate (index 5) or decelerate (index 3).
+- V12 is in the far distance range (index 2), with same as the ego car (index 0). It is on the front right of ego car (index 3), moving in slow speed (index 1 or 2). Their actions are moving straight and keep speed(index 4).
+- Map: This happens in a 8-lane two-way road, the ego vehicle is on the left-turn lane with lane id 4. Because V1 is turning, there is an intersection with a 4-way perpendicular road around 10 meters (index 2) ahead as ego vehicle is turning left.
+Actor Vector:
+- 'V1': [-1, 0, 0, 2, 4, 1, 1, 1]
+- 'V2': [2, 0, 0, 2, 4, 4, 3, 3]
+- 'V3': [2, 0, 0, 1, 4, 4, 3, 3]
+- 'V4': [2, 0, 0, 1, 3, 3, 3, 3]
+- 'V5': [1, 0, 1, 2, 4, 5, 5, 4]
+- 'V6': [1, 0, 1, 1, 4, 4, 4, 4]
+- 'V7': [1, 0, 1, 1, 4, 5, 5, 4]
+- 'V8': [0, 1, 3, 0, 0, 0, 0, 0]
+- 'V9': [0, 1, 3, 0, 0, 0, 0, 0]
+- 'V10': [0, 2, 1, 2, 4, 5, 3, 3]
+- 'V11': [0, 2, 1, 2, 4, 4, 5, 5]
+- 'V12': [3, 2, 0, 2, 4, 4, 4, 4]
+Map Vector:
+- 'Map': [4, 4, 2, 2, 1, 4]
+
+Query: the scene is very sparse, the ego car moves forward, most cars are moving in fast speed
+
+Output:
+Summary: The ego vehicle (V1) moves forward at a fast speed in a sparse traffic scenario. Due to the sparse nature of the scenario, there should be few vehicles around the ego vehicle and they should be at larger distances. We generate 3 vehicles in the scene on a 8-lane two-way road with an intersection in front. The ego car is placed on the middle lane.
+Explanation:
+- V1 (ego vehicle) is in the center and moves forward. Because V1 moves fast, its speed is set to 8 (fast speed) and action indices are 4 (keep speed).
+- V2 is at a far distance (index 1) and moves with a fast speed (index 7). It is in the back right of ego car (index 2) with the same direction as the ego vehicle (index 0). Its actions are all to keep speed (index 4) at a fast pace.
+- V3 is at a farther distance (index 2) and also moves with a fast speed (index 7). It is in the front left of ego car (index 0) and has the same direction as the ego vehicle (index 0). Its actions are to keep speed (index 4) at a fast pace.
+Map: Because the scenario is very sparse, this occurs in a 8-lane two-way road with a four-lane intersection ahead. The ego vehicle is in the middle lane with lane id 3. The intersection is 15 meters away, with index 3.
+Actor Vector:
+- 'V1': [-1, 0, 0, 8, 4, 4, 4, 4]
+- 'V2': [2, 1, 0, 7, 4, 4, 4, 4]
+- 'V3': [0, 2, 0, 7, 4, 4, 4, 4]
+Map Vector:
+- 'Map': [4, 4, 2, 2, 3, 3]
+
+Query: the scene is with meduim density. there are only vehicles on the back side of the center car. most cars are moving in medium speed. the center car moves staright.
+
+Output:
+Summary: The ego vehicle (V1) moves straight at a medium speed in a medium-density traffic scenario. All other vehicles are located behind the ego vehicle, which corresponds to the scenario's medium density. We generate 6 vehicles in the scene on a four-lane two-way road. The ego car is placed on the second lane from the right.
+Explanation:
+- V1 (ego vehicle) is in the center and moves straight. Because V1 moves with a medium speed, its speed is set to 4 (medium speed) and action indices are 4 (keep speed)
+- V2-V4 are in the closest distance ranges (index 0 and 1). They are moving in the same direction as the ego vehicle (index 0). Because the ego car is on the second lane, they all located in the back right (index 2) of the ego vehicle. They are all moving with a medium speed (index 3 or 4),  Their actions are all to keep speed (index 4).
+- V5-V6 are in a further distance range (index 1). They are moving in the opposite direction of the ego vehicle (index 1), therefore they are all on the left side of ego vehicle, locating in the back left (index 1) of the ego vehicle. They are all moving with a medium speed (index 3 or 4), in the same direction as the ego vehicle (index 0). Their actions are all to keep speed (index 4).
+- Map: Given the medium density and the presence of vehicles behind the ego vehicle, we assume this happens on a 4-lane two-way road. The ego vehicle is in the second lane from the right, with lane id 2. There is no intersection nearby, indicated by -1.
+Actor Vector:
+- 'V1': [-1, 0, 0, 4, 4, 4, 4, 4]
+- 'V2': [2, 0, 0, 4, 4, 4, 4, 4]
+- 'V3': [2, 1, 0, 3, 4, 4, 4, 4]
+- 'V4': [2, 1, 0, 4, 4, 4, 4, 4]
+- 'V5': [1, 1, 1, 3, 4, 4, 4, 4]
+- 'V6': [1, 1, 1, 4, 4, 4, 4, 4]
+Map Vector:
+- 'Map': [2, 2, 0, 0, -1, 2]
+
+
+Query: INSERT_QUERY_HERE
+
+Output:

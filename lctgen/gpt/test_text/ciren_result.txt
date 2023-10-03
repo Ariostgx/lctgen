@@ -1,0 +1,5 @@
+V1 was traveling northbound in lane five of a five lane controlled access roadway. V2 was traveling in lane four next to V1. A non-contact Medium-Heavy truck was traveling next to V2 in lane three when it began to change lanes to the left forcing V2 to also change lanes to the left. When changing lanes to the left the left side of V2's trailer contacted the right side of V1. This contact forced V1 to depart the roadway where the left side of V1 contacted a concrete barrier before continuing to travel forward across all five lanes to depart the roadway on the right, where the front of V1 contacted the guardrail face before coming to final rest.
+- 'V1': ['pos': -1, 'distance': 0, 'direction': 0, 'speed': 2, 'action': [5, 5, 2, 4]]
+- 'V2': ['pos': 3, 'distance': 1, 'direction': 4, 'speed': 0, 'action': [4, 3, 0, 1]]
+- 'Map': ['hori_lane': [2,3], 'vertical_lane': [2,1], 'front_vertical_lane': [2,1], 'left/right_lane_dir': [1, 0]]
+

@@ -1,0 +1,50 @@
+
+
+Query: the scene is very dense. there are only vehicles on the right back side of the center car. most cars are moving in slow speed. the center car turns left.
+
+Output:
+Summary: The ego vehicle (V1) turns left in a dense traffic scenario with multiple vehicles on the right back side. There are 6 vehicles in this scenario. Because the ego vehicle is turning left, the scenario is a two-lane two-way road with an intersection ahead.
+Explanation: 
+- V1 (ego vehicle) is in the center and turns left, so its position is -1, distance is 0, direction is 0, and speed is determined by the scenario.
+- V2-V5 are on the right back side of V1, so their positions are 2 (back right), distances are determined by the scenario, directions are 0 (parallel_same), and speeds are slow.
+- V6 is also on the right back side of V1 but slightly further away, so its position is 2 (back right), distance is determined by the scenario, direction is 0 (parallel_same), and speed is slow.
+- This happens in a two-lane two-way road, the ego vehicle is one the left turn lane with lane id 2. There is an intersection with a two-way road ahead.
+Actor Vector:
+- 'V1': [-1, 0, 0, 4, 4, 1, 1, 4]
+- 'V2': [2, 1, 0, 2, 4, 4, 4, 4]
+- 'V3': [2, 2, 0, 2, 4, 4, 4, 4]
+- 'V4': [2, 2, 0, 2, 4, 4, 4, 4]
+- 'V5': [2, 3, 0, 2, 4, 4, 4, 4]
+- 'V6': [2, 5, 0, 2, 4, 4, 4, 4]
+Map Vector:
+- 'Map': [2, 2, 2, 2, 3, 2]
+
+Query: A 2021 Subaru Forester compact utility (V1) was traveling north in the right lane of two negotiating the left curve at approximately 53 km/h (33 mph). Pre-crash data from the EDR suggests she intended to continue straight through the intersection to proceed to the highway on-ramp on the other side. A 2021 Kenworth tractor-trailer (V2) was traveling west in the second lane of three and intending to continue straight through the intersection. Police estimated V2\u2019s travel speed as 56 km/h (35 mph).   Vehicle 1 entered the intersection without slowing for the stop sign and was struck on the right plane by V2\u2019s front (Event 1). Both vehicles then traveled towards the shoulder in the northwest corner of the intersection. The front of V2 struck a guardrail end terminal (Event 2) before coming to rest in the roadside northwest of the intersection. Vehicle 1 struck the guardrail\u2019s face (Event 3) before coming to rest on the westbound shoulder of the road. Both vehicles were towed due to disabling vehicle damage.
+Output:
+Summary: V1 is traveling north and enters an intersection without stopping, getting struck by V2 traveling west. There are 2 vehicles in this scenario. This happens on a two-lane two-way road with an intersection.
+Explanation: 
+- V1 (ego vehicle) is moving north in the right lane, so its position is -1, distance is 0, direction is 0, and speed is 33 mph (53 km/h) which is approximately 14.7 m/s (index 5). V1 keeps going straight, so its actions are all 4 (keep speed).
+- V2 is moving west in the second lane of three and hit by V1 moving north, so it is on the right of V1 and front of V1, so its position is 3 (front right). Because V2 is moving west and V1 moving north, its direction is 2 (perpendicular_up), and speed is 35 mph (56 km/h) which is approximately 15.6 m/s (index 6). V2 keeps going straight, so its actions are all 4 (keep speed).
+- This happens in a two-lane two-way road, the ego vehicle is in the right lane with lane id 1. There is an intersection with a three-lane two-way road ahead. The distance of the ego vehicle to the intersection is set to be 30 meter (index 5) to make the ego vehicle crash when it enters the intersection without stopping.
+Actor Vector:
+- 'V1': [-1, 0, 0, 5, 4, 4, 4, 4]
+- 'V2': [3, 6, 2, 6, 4, 4, 4, 4]
+Map Vector:
+- 'Map': [2, 2, 3, 3, 6, 1]
+
+Query: A 2019 Ram 1500 four-door pickup (V1) was stopped facing north in a business entrance intersecting the four-lane road. A 2002 Chevrolet Trailblazer large utility vehicle (V2) was traveling eastbound in the second lane of the roadway. Vehicle 1 entered the roadway after non-contact stopped traffic in lane one waved him through. Vehicle 1 began turning left when it was struck on the left front plane by the front right of V2 (Event 1). Vehicle 1 rotated clockwise approximately ninety degrees before coming to rest in the eastbound second lane. Vehicle 2 traveled slightly left after impact before coming to rest in the road near the impact location. Both vehicles were towed due to damage. 
+
+Summary: V1 is stopped facing north in a business entrance intersecting a four-lane road. V2 is traveling eastbound in the second lane. V1 enters the roadway and begins turning left when it is struck by V2. Both vehicles come to rest in the eastbound lanes.
+Explanation: 
+- V1 (ego vehicle) is moving north, so its position is -1, distance is 0, direction is 0, its initial speed is 0, and turning left. V1 turns left, so its actions are with 1 (turn left) and keep speed.
+- V2 is moving east and V1 is moving north, and crash with V1 after V1 turn left, so V2 is on the left of V1 and front of V1, with position of 0 (front left). Because V2 is moving east and V1 is moving north, V2's direction is perpendicular_down seen from V1's direciton as x-positive, so V2 has direction 3.
+- V1 is on the left lane of a two-lane one-way road. There is an intersection with a four-lane two-way road ahead. The distance of the ego vehicle to the intersection is set to be 5 meter (index 1) to make the ego vehicle crash when it left turns into the intersection.
+Actor Vector:
+- 'V1': [-1, 0, 0, 0, 1, 1, 1, 4]
+- 'V2': [0, 6, 3, 6, 4, 4, 4, 4]
+Map Vector:
+- 'Map': [2, 0, 2, 3, 1, 2]
+
+Query: INSERT_QUERY_HERE
+
+Output:

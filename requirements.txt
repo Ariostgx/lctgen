@@ -1,0 +1,16 @@
+pytorch-lightning==1.9.3
+matplotlib==3.6.2
+matplotlib-inline==0.1.6
+protobuf==3.20.*
+tensorflow==2.11.1
+scipy==1.9.3
+Shapely==1.8.0
+torchmetrics==0.9.3
+tqdm==4.62.3
+PyYAML==6.0
+imageio==2.25.1
+wandb==0.15.2
+yapf==0.30.0
+tensorboard==2.14.0
+openai==0.28.1
+yacs==0.1.8
