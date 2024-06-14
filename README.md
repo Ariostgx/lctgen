@@ -123,10 +123,12 @@ We also thank authors of [**TrafficGen**](https://github.com/metadriverse/traffi
 ## Citation
 
 ```latex
-@article{tan2023lctgen,
-  title={Language Conditioned Traffic Generation},
-  author={Tan, Shuhan and Ivanovic, Boris and Weng, Xinshuo and Pavone, Marco and Kr\"ahenb\"uhl, Philipp,
-  journal={7th Annual Conference on Robot Learning (CoRL)},
-  year={2023}
+@inproceedings{
+    tan2023language,
+    title={Language Conditioned Traffic Generation},
+    author={Shuhan Tan and Boris Ivanovic and Xinshuo Weng and Marco Pavone and Philipp Kraehenbuehl},
+    booktitle={7th Annual Conference on Robot Learning},
+    year={2023},
+    url={https://openreview.net/forum?id=PK2debCKaG}
 }
 ```
