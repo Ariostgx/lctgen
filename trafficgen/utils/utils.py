@@ -58,7 +58,7 @@ def MDdata_to_initdata(MDdata):
         tp = 0
         try:
             lane_type = lane['type']
-        except:
+        except KeyError:
             lane_type = lane['sign']
             poly_line = lane['polygon']
             if lane_type == 'cross_walk':
